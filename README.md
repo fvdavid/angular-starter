@@ -26,7 +26,7 @@ Manually add the following props to the angular.json
 
 ## UI
 
-1. Tailwind CSS 4
+### 1. Tailwind CSS 4
 
 ```sh
 pnpm add tailwindcss @tailwindcss/postcss postcss
@@ -58,11 +58,39 @@ pnpm add tailwindcss @tailwindcss/postcss postcss
 </div>
 ```
 
-2. Material UI
+### 2. Material UI
 
 ```sh
 pnpm ng add @angular/material
 ```
+
+```html
+<div class="text-center mt-10">
+  <button matFab extended>
+    <mat-icon>favorite</mat-icon>
+    from Material UI
+  </button>
+  </div>
+```
+
+### 3. Setting up Tailwind v4 in Visual Code (autocomplete)
+
+  > Open Setting > Search "tailwindCSS.experimental.configFile" > Edit in setting.json
+  > then make sure something like this:
+
+```json
+"tailwindCSS.experimental.configFile": "src/styles.scss"
+```
+
+or if you want available with tailwind v3
+
+```json
+"tailwindCSS.experimental.configFile": {
+  ".config/tailwind.config.js",
+  "src/styles.scss"
+}
+```
+
 
 ## Development server
 
