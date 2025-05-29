@@ -7,9 +7,9 @@ pnpm create @angular@latest [project-name]
 ```
 
 In this case:
-✔ Do you want to create a 'zoneless' application without zone.js (Developer Preview)? Yes
-✔ Which stylesheet format would you like to use? Sass (SCSS) [ https://sass-lang.com/documentation/syntax#scss]
-✔ Do you want to enable Server-Side Rendering (SSR) and Static Site Generation (SSG/Prerendering)? No
+  - Do you want to create a 'zoneless' application without zone.js (Developer Preview)? Yes
+  - Which stylesheet format would you like to use? Sass (SCSS) [ https://sass-lang.com/documentation/syntax#scss]
+  - Do you want to enable Server-Side Rendering (SSR) and Static Site Generation (SSG/Prerendering)? No
 
 Manually add the following props to the angular.json
 
@@ -22,6 +22,46 @@ Manually add the following props to the angular.json
     "changeDetection": "OnPush"
   }
 },
+```
+
+## UI
+
+1. Tailwind CSS 4
+
+```sh
+pnpm add tailwindcss @tailwindcss/postcss postcss
+```
+
+- Configure PostCSS: Create a .postcssrc.json file in the root of your project and add the Tailwind CSS plugin: 
+
+```json
+{
+  "plugins": {
+    "@tailwindcss/postcss": {}
+  }
+}
+```
+
+- Import Tailwind CSS: Add the following import statement to your src/styles.scss file:
+
+```scss
+@use "tailwindcss";
+```
+
+- Start Using Tailwind: You can now use Tailwind CSS utility classes in your Angular components, such as:
+
+```html
+<div class="bg-red-300">
+  <h1 class="text-3xl font-bold underline text-center mt-10">
+    Angular v20 + Tailwind CSS 4
+  </h1>
+</div>
+```
+
+2. Material UI
+
+```sh
+pnpm ng add @angular/material
 ```
 
 ## Development server
