@@ -1,6 +1,28 @@
-# AngularStarter
+# Angular 20 Project Setup
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.0.
+## Installation
+
+```sh
+pnpm create @angular@latest [project-name]
+```
+
+In this case:
+✔ Do you want to create a 'zoneless' application without zone.js (Developer Preview)? Yes
+✔ Which stylesheet format would you like to use? Sass (SCSS) [ https://sass-lang.com/documentation/syntax#scss]
+✔ Do you want to enable Server-Side Rendering (SSR) and Static Site Generation (SSG/Prerendering)? No
+
+Manually add the following props to the angular.json
+
+- "changeDetection: "OnPush"
+
+```json
+"schematics": {
+  "@schematics/angular:component": {
+    "style": "scss",
+    "changeDetection": "OnPush"
+  }
+},
+```
 
 ## Development server
 
@@ -10,7 +32,7 @@ To start a local development server, run:
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+navigate to `http://localhost:4200/`.
 
 ## Code scaffolding
 
