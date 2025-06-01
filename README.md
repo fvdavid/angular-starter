@@ -91,6 +91,26 @@ or if you want available with tailwind v3
 }
 ```
 
+## Testing
+
+Install the Angular Testing Library along the user-event library:
+
+```sh
+pnpm i -D @testing-library/angular @testing-library/dom @testing-library/user-event
+```
+
+Next, install Playwright and install the accompanying browsers:
+
+```sh
+pnpm i -D @playwright/test
+pnpm playwright install
+```
+
+### Package Manager
+
+This example using PNPM as a package manager.
+PNPM is Performant NPM, a package manager for Node.js that aims to address some of the limitations of traditional package managers like npm and Yarn, particularly concerning disk space and installation speed.
+  
 
 ## Development server
 
