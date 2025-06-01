@@ -7,9 +7,10 @@ pnpm create @angular@latest [project-name]
 ```
 
 In this case:
-  - Do you want to create a 'zoneless' application without zone.js (Developer Preview)? Yes
-  - Which stylesheet format would you like to use? Sass (SCSS) [ https://sass-lang.com/documentation/syntax#scss]
-  - Do you want to enable Server-Side Rendering (SSR) and Static Site Generation (SSG/Prerendering)? No
+
+- Do you want to create a 'zoneless' application without zone.js (Developer Preview)? Yes
+- Which stylesheet format would you like to use? Sass (SCSS) [ https://sass-lang.com/documentation/syntax#scss]
+- Do you want to enable Server-Side Rendering (SSR) and Static Site Generation (SSG/Prerendering)? No
 
 Manually add the following props to the angular.json
 
@@ -32,7 +33,7 @@ Manually add the following props to the angular.json
 pnpm add tailwindcss @tailwindcss/postcss postcss
 ```
 
-- Configure PostCSS: Create a .postcssrc.json file in the root of your project and add the Tailwind CSS plugin: 
+- Configure PostCSS: Create a .postcssrc.json file in the root of your project and add the Tailwind CSS plugin:
 
 ```json
 {
@@ -52,9 +53,7 @@ pnpm add tailwindcss @tailwindcss/postcss postcss
 
 ```html
 <div class="bg-red-300">
-  <h1 class="text-3xl font-bold underline text-center mt-10">
-    Angular v20 + Tailwind CSS 4
-  </h1>
+  <h1 class="text-3xl font-bold underline text-center mt-10">Angular v20 + Tailwind CSS 4</h1>
 </div>
 ```
 
@@ -70,13 +69,13 @@ pnpm ng add @angular/material
     <mat-icon>favorite</mat-icon>
     from Material UI
   </button>
-  </div>
+</div>
 ```
 
 ### 3. Setting up Tailwind v4 in Visual Code (autocomplete)
 
-  > Open Setting > Search "tailwindCSS.experimental.configFile" > Edit in setting.json
-  > then make sure something like this:
+> Open Setting > Search "tailwindCSS.experimental.configFile" > Edit in setting.json
+> then make sure something like this:
 
 ```json
 "tailwindCSS.experimental.configFile": "src/styles.scss"
@@ -106,11 +105,83 @@ pnpm i -D @playwright/test
 pnpm playwright install
 ```
 
-### Package Manager
+## Code Quality
+
+For code quality, we install `angular-eslint`, `eslint-plugin-unused-imports`, `husky`, `prettier`,`lint-staged` and Sheriff.
+
+```bash
+pnpm ng add @angular-eslint/schematics
+pnpm i -D eslint-plugin-unused-imports husky prettier lint-staged @softarc/{sheriff-core,eslint-plugin-sheriff}
+```
+
+To integrate `eslint-plugin-unused-imports` and sheriff into ESLint, add the following to `eslint.config.js`:
+
+```javascript
+// exsting imports...
+
+const sheriff = require("@softarc/eslint-plugin-sheriff");
+const unusedImports = require("eslint-plugin-unused-imports");
+
+module.exports = tseslint.config(
+  // exsting setup...
+  {
+    files: ["**/*.ts"],
+    extends: [sheriff.configs.all],
+  },
+  {
+    plugins: { "unused-imports": unusedImports },
+    rules: {
+      "@typescript-eslint/no-unused-vars": "off",
+      "unused-imports/no-unused-imports": "error",
+      "unused-imports/no-unused-vars": [
+        "warn",
+        {
+          vars: "all",
+          varsIgnorePattern: "^_",
+          args: "after-used",
+          argsIgnorePattern: "^_",
+        },
+      ],
+    },
+  },
+);
+```
+
+For defining barrel-less modulesyou can initialize the Sheriff configuration by running the following command:
+
+```bash
+pnpm sheriff init
+```
+
+Code formatting will be done by prettier, but only for staged files and before a commit:
+
+```bash
+pnpm husky init
+```
+
+Create the `.lintstagedrc` with the following content:
+
+```text
+{
+  "*.{js,ts,json,html,scss,css,md}": [
+    "prettier --write"
+  ]
+}
+
+```
+
+`.husky/pre-commit`, should have the following content:
+
+```bash
+pnpm ng lint
+pnpm ng test --watch=false
+pnpm lint-staged --allow-empty
+```
+
+## Package Manager
 
 This example using PNPM as a package manager.
 PNPM is Performant NPM, a package manager for Node.js that aims to address some of the limitations of traditional package managers like npm and Yarn, particularly concerning disk space and installation speed.
-  
 
 ## Development server
 
